@@ -19,6 +19,7 @@ function Todo() {
       { id: items.length, text: newItem, done: false }
     ];
     setItems(newItems);
+    inputRef.current.value = null;
   }
 
   useEffect(() => {
