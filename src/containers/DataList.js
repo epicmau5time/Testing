@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import ListItem from "../components/ListItem";
 
-export default function ApiTest() {
+export default function DataContainer() {
   const [content, setContent] = useState([]);
 
   useEffect(() => {
@@ -17,23 +18,14 @@ export default function ApiTest() {
         console.log(error);
       }
     };
+    console.log("fetch");
 
     fetchApi();
   }, []);
 
-  const items = content.map((c, i) => (
-    <div key={i}>
-      <h3>{c.title}</h3>
-      <div>
-        <p>ID: {c.id}</p>
-        <p>User ID: {c.userId}</p>
-        <p>Body: {c.body}</p>
-        <button>+</button>
-        <p>Votes: {c.votes}</p>
-        <button>-</button>
-      </div>
+  return (
+    <div>
+      <ListItem content={content} setContent={setContent} />
     </div>
-  ));
-
-  return <div>{items}</div>;
+  );
 }
