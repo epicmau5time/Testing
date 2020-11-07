@@ -1,31 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ListItem from "../components/ListItem";
+import useFetch from "../FetchApi";
+
+const URL = "https://jsonplaceholder.typicode.com/posts";
 
 export default function DataContainer() {
-  const [content, setContent] = useState([]);
+  const [data, setData] = useFetch(URL);
 
-  useEffect(() => {
-    const fetchApi = async () => {
-      try {
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/posts"
-        );
-
-        const data = await response.json();
-        const final = data.map((item) => ({ ...item, votes: 0 }));
-        setContent(final);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    console.log("fetch");
-
-    fetchApi();
-  }, []);
-
-  return (
-    <div>
-      <ListItem content={content} setContent={setContent} />
-    </div>
-  );
+  return <div>{data && <ListItem content={data} setContent={setData} />}</div>;
 }
